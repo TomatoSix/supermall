@@ -3,15 +3,23 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <!-- 轮播图 -->
-    <home-swiper :banners="banners"></home-swiper>
-    <!-- 推荐 -->
-    <recommend-view :recommends="recommends"></recommend-view>
-    <!-- 本周流行 -->
-    <feature-view/>
-    <tab-control class="tab-control" :titles="['流行','新款','精选']"
-                @tabClick="tabClick"></tab-control>
-    <goods-list :goods="showGoods"></goods-list>
+    <!-- ref如果是绑定在组件中的，那么通过'this.$refs.refname'获取到的是一个组件对象 -->
+    <!-- ref如果是绑定在普通元素中的，那么通过'this.$refs.refname'获取到的是一个元素对象 -->
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+      <!-- 轮播图 -->
+      <home-swiper :banners="banners"></home-swiper>
+      <!-- 推荐 -->
+      <recommend-view :recommends="recommends"></recommend-view>
+      <!-- 本周流行 -->
+      <feature-view/>
+      <tab-control class="tab-control" :titles="['流行','新款','精选']"
+                  @tabClick="tabClick"></tab-control>
+      <goods-list :goods="showGoods"></goods-list>
+    </scroll>
+
+    <!-- 点击回到顶部 -->
+    <!-- 组件不能监听点击，需要使用@click.native 监听组件根元素的原生事件  -->
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -24,6 +32,8 @@ import FeatureView from "./childComps//FeatureView"
 import NavBar from 'components/common/navbar/NavBar';
 import TabControl from "components/content/tabControl/TabControl"
 import GoodsList from "components/content/goods/GoodsList"
+import Scroll from "components/common/scroll/Scroll"
+import BackTop from "components/content/backTop/BackTop"
 
 // 导入方法
 import { getHomeMultidata, getHomeGoods } from 'network/home';
@@ -36,7 +46,10 @@ export default {
     FeatureView,
     NavBar,
     TabControl,
-    GoodsList
+    GoodsList,
+    BackTop,
+    Scroll
+
   },
   data() {
     return {
@@ -50,7 +63,8 @@ export default {
         'new' : {page: 0,list: []},
         'sell' : {page: 0,list: []},
       },
-      currentType: 'pop'
+      currentType: 'pop',
+      isShowBackTop: true
     }
   },
   created() {
@@ -62,8 +76,12 @@ export default {
     this.getHomeGoodsData('new')
     this.getHomeGoodsData('sell')
   },
+  mounted() {
+    this.$refs.swiper
+  },
   methods: {
     // 1.事件监听相关方法
+    // 点击流行 精选 新款 进行切换
     tabClick(index){
       switch (index) {
         case 0:
@@ -76,6 +94,14 @@ export default {
           this.currentType = 'sell'
           break
       }
+    },
+    // 设置点击backTop返回至顶层
+    backClick() {
+      console.log("backClick");
+      this.$refs.scroll.scrollTo(0, 0, 500)
+    },
+    contentScroll(position) {
+      this.isShowBackTop = -position.y > 1000
     },
 
     // 2.网络请求相关方法
@@ -106,9 +132,11 @@ export default {
 }
 </script>
 
-<style>
+// scoped表示作用域，所有样式只对当前组件起效果
+<style scoped>
   #home {
-    padding-top: 44px;
+    /* 视口高度 */
+    height: 100vh;
   }
 
   .home-nav {
@@ -124,5 +152,12 @@ export default {
   .tab-control {
     position: sticky;
     top: 44px;
+    z-index: 9;
+  }
+  .content {
+    height: calc(100% - 93px);
+    overflow: hidden;
+    /* 这里可能会出现滚动部分不充满屏幕的情况 */
+    margin-top: 44px;
   }
 </style>
