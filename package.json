@@ -7,7 +7,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "vue": "^2.6.11"
+    "axios": "^0.21.1",
+    "better-scroll": "^1.13.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-service": "~4.5.0",
