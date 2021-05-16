@@ -17,10 +17,13 @@
       probeType: {
         type: Number,
         default: 0
+<<<<<<< HEAD
       },
       pullUpLoad: {
         type: Boolean,
         default: false
+=======
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
       }
     },
     data(){
@@ -32,6 +35,7 @@
       // 1.创建BScroll对象
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
+<<<<<<< HEAD
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       })
@@ -68,6 +72,23 @@
       }
     },
 
+=======
+        probeType: this.probeType
+      })
+
+      // 2.监听滚动的位置
+      this.scroll.on('scroll', (position) => {
+        this.$emit('scroll', position)
+      })
+
+      // this.scroll = new BScroll(document.querySelector('.wrapper'))
+    },
+    methods: {
+      scrollTo(x, y, time=500) {
+        this.scroll.scrollTo(x, y, time)
+      }
+    },
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
   }
 </script>
 

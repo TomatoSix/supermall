@@ -5,8 +5,11 @@ const Home = () => import('../views/home/Home')
 const Category = () => import('../views/category/Category')
 const Cart = () => import('../views/cart/Cart')
 const Profile = () => import('../views/profile/Profile')
+<<<<<<< HEAD
 const Detail = () => import('../views/detail/Detail')
 
+=======
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
 
 Vue.use(VueRouter)
 
@@ -30,10 +33,13 @@ const routes =[
   {
     path: '/profile',
     component: Profile
+<<<<<<< HEAD
   },
   {
     path: '/detail/:iid',
     component: Detail
+=======
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
   }
 ]
 const router = new VueRouter({

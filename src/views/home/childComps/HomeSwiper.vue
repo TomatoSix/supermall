@@ -3,7 +3,11 @@
   <swiper>
     <swiper-item v-for="item in banners" :key="item.image">
       <a :href="item.link">
+<<<<<<< HEAD
         <img :src="item.image" alt="" @load="imageLoad">
+=======
+        <img :src="item.image" alt="">
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
       </a>
     </swiper-item>
   </swiper>
@@ -26,6 +30,7 @@ export default {
     Swiper,
     SwiperItem
   },
+<<<<<<< HEAD
   methods: {
     imageLoad() {
       if (!this.isLoad){
@@ -39,6 +44,8 @@ export default {
       isLoad: false
     }
   }
+=======
+>>>>>>> f142d536a34deb6a048aef49983de911444270a1
 }
 </script>
 
