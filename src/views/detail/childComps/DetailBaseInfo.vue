@@ -5,7 +5,7 @@
       <span class="n-price">{{ goods.newPrice }}</span>
       <span class="o-price">{{ goods.oldPrice }}</span>
       <span :style="{ backgroundColor: goods.discountBgColor }"
-            v-if="goods.discount" 
+            v-if="goods.discount"
             class="discount">{{ goods.discount }} </span>
     </div>
     <div class="info-other">
@@ -14,8 +14,8 @@
       <span>{{ goods.services[goods.services.length - 1].name }}</span>
     </div>
     <div class="info-service">
-      <span class="info-service-item" 
-            v-for="index in goods.services.length-1" 
+      <span class="info-service-item"
+            v-for="index in goods.services.length-1"
             :key="index">
         <img :src="goods.services[index-1].icon" alt="" />
         <span>{{ goods.services[index-1].name }}</span>
@@ -26,15 +26,15 @@
 
 <script>
 export default {
- name: 'DetailBaseInfo',
- props: {
-   goods: {
-     type: Object,
-     default() {
-       return {}
-     }
-   }
- }
+  name: 'DetailBaseInfo',
+  props: {
+    goods: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  }
 }
 </script>
 

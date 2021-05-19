@@ -3,42 +3,29 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-<<<<<<< HEAD
-    <tab-control class="tab-control" 
+    <tab-control class="tab-control"
                   :titles="['流行','新款','精选']"
-                  @tabClick="tabClick" 
+                  @tabClick="tabClick"
                   ref="tabControl1"
                   v-show="isTabFixed"></tab-control>
     <!-- ref如果是绑定在组件中的，那么通过'this.$refs.refname'获取到的是一个组件对象 -->
     <!-- ref如果是绑定在普通元素中的，那么通过'this.$refs.refname'获取到的是一个元素对象 -->
-    <scroll class="content" 
-            ref="scroll" 
-            :probe-type="3" 
+    <scroll class="content"
+            ref="scroll"
+            :probe-type="3"
             @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadMore">
       <!-- 轮播图 -->
       <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
-=======
-    <!-- ref如果是绑定在组件中的，那么通过'this.$refs.refname'获取到的是一个组件对象 -->
-    <!-- ref如果是绑定在普通元素中的，那么通过'this.$refs.refname'获取到的是一个元素对象 -->
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
-      <!-- 轮播图 -->
-      <home-swiper :banners="banners"></home-swiper>
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
       <!-- 推荐 -->
       <recommend-view :recommends="recommends"></recommend-view>
       <!-- 本周流行 -->
       <feature-view/>
-<<<<<<< HEAD
-      <tab-control class="tab-control" 
+      <tab-control class="tab-control"
                   :titles="['流行','新款','精选']"
-                  @tabClick="tabClick" 
+                  @tabClick="tabClick"
                   ref="tabControl2"></tab-control>
-=======
-      <tab-control class="tab-control" :titles="['流行','新款','精选']"
-                  @tabClick="tabClick"></tab-control>
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
 
@@ -89,14 +76,10 @@ export default {
         'sell' : {page: 0,list: []},
       },
       currentType: 'pop',
-<<<<<<< HEAD
       isShowBackTop: false,
       tabOffSetTop: 0,
       isTabFixed: false,
       saveY: 0
-=======
-      isShowBackTop: true
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
     }
   },
   created() {
@@ -107,15 +90,14 @@ export default {
     this.getHomeGoodsData('pop')
     this.getHomeGoodsData('new')
     this.getHomeGoodsData('sell')
-<<<<<<< HEAD
-    
+
   },
   mounted() {
     //1.图片加载完成的事件监听
     const refresh = this.debounce(this.$refs.scroll.refresh(),200)
     this.$bus.$on('itemImageLoad', () => {
       refresh()
-    })   
+    })
   },
   methods: {
     // 1.事件监听相关方法
@@ -129,14 +111,6 @@ export default {
         }, delay)
       }
     },
-=======
-  },
-  mounted() {
-    this.$refs.swiper
-  },
-  methods: {
-    // 1.事件监听相关方法
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
     // 点击流行 精选 新款 进行切换
     tabClick(index){
       switch (index) {
@@ -150,12 +124,9 @@ export default {
           this.currentType = 'sell'
           break
       }
-<<<<<<< HEAD
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
 
-=======
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
     },
     // 设置点击backTop返回至顶层
     backClick() {
@@ -163,7 +134,6 @@ export default {
       this.$refs.scroll.scrollTo(0, 0, 500)
     },
     contentScroll(position) {
-<<<<<<< HEAD
       // 1.判断BackTop 是否显示
       this.isShowBackTop = -position.y > 1000
       // 2.决定tabControl是否吸顶(position: fixed)
@@ -182,9 +152,6 @@ export default {
       // 2.获取tabControl的offSetTop
       // 所有的组件都有一个属性 $el:用于获取组件中的元素
       this.tabOffSetTop = this.$refs.tabControl2.$el.offsetTop
-=======
-      this.isShowBackTop = -position.y > 1000
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
     },
 
     // 2.网络请求相关方法
@@ -204,11 +171,8 @@ export default {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page += 1
         console.log(res);
-<<<<<<< HEAD
 
         this.$refs.scroll.finishPullUp()
-=======
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
       })
     }
   },
@@ -216,7 +180,6 @@ export default {
     showGoods() {
       return this.goods[this.currentType].list
     }
-<<<<<<< HEAD
   },
   destroyed() {
     console.log("home destroyed");
@@ -228,8 +191,6 @@ export default {
   deactivated() {
     // 1.保存Y值
     this.saveY = this.$refs.scroll.getScrollY()
-=======
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
   }
 }
 </script>
@@ -245,19 +206,11 @@ export default {
     background-color: var(--color-tint);
     color: white;
 
-<<<<<<< HEAD
     /* position: fixed;
     left: 0;
     right: 0;
     top: 0;
     z-index: 9; */
-=======
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 9;
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
   }
   .tab-control {
     position: sticky;
@@ -268,13 +221,8 @@ export default {
     height: calc(100% - 93px);
     overflow: hidden;
     /* 这里可能会出现滚动部分不充满屏幕的情况 */
-<<<<<<< HEAD
     /* margin-top: 44px; */
   }
 
 
-=======
-    margin-top: 44px;
-  }
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
 </style>

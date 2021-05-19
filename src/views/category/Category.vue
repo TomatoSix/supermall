@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <h2></h2>
-=======
-  <h2>分类</h2>
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
 </template>
 
 <script>

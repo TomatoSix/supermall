@@ -1,10 +1,6 @@
 <template>
   <div>
-<<<<<<< HEAD
     <!-- <router-view></router-view> -->
-=======
-    <router-view></router-view>
->>>>>>> f142d536a34deb6a048aef49983de911444270a1
     <tab-bar>
       <tab-bar-item path="/home" activeColor="red">
         <img slot="item-icon" src="~/assets/images/tabbar/home.svg" alt="">
