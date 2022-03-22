@@ -1,4 +1,5 @@
 # supermall
+项目名称：基于vue框架搭建的移动商城
 
 ## Project setup
 ```
